@@ -6,22 +6,6 @@
 <html>
 	<body>
 		<center>
-
-			{% with messages = get_flashed_messages(with_categories=True) %}
-				{% if messages %}
-					{% for category, message in messages %}
-
-						<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-							<span>{{ message }}</span>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">×</span>
-							</button>
-						</div>
-
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
-			
 			{% if session['logged_in'] %}
 				<p>Oh no Dont show page</p>
 			{% else %}
@@ -34,6 +18,13 @@
 			</form>
 			{% endif %}
 		
+		<hr>
+        <a href="/login/">
+          <h5>
+            [ Login ]
+          </h5>
+        </a>
+
 		</center>
 	</body>
 </html>

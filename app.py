@@ -1,9 +1,14 @@
 
-from flask import Flask, url_for, render_template, request, redirect, session, flash, send_from_directory
+from flask import Flask, url_for, render_template, request, redirect, session, send_from_directory
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import sqlite3, os
 
+
+try:
+    os.mkdir('static')
+except:
+    pass
 
 conn = sqlite3.connect('test.db', 
             check_same_thread=False)
@@ -18,25 +23,26 @@ app = Flask(__name__)
 app.jinja_env.globals.update(os=os)
 
 
-try:
-    os.mkdir('static')
-except:
-    pass
-
-
 @app.route('/', methods=['GET', 'POST'])
-def home():    
+def home():
+    static_username = 'static/' + session['username']
+
+    try:
+        os.mkdir(static_username)
+    except:
+        pass
+
     if request.method == 'POST':  
         f = request.files['file']
 
         filename = secure_filename(f.filename)
-        saved = os.path.join('static', filename)
+        saved = os.path.join(static_username, filename)
         f.save(saved)
     
     elif not session.get('logged_in'):
         return render_template('login.html')
     
-    new_path = sorted(Path('static').iterdir(), key=os.path.getmtime)
+    new_path = sorted(Path(static_username).iterdir(), key=os.path.getmtime)
     return render_template('index.html', new_path=new_path)
 
 
@@ -61,7 +67,6 @@ def login():
             # print(statement, username.split("'")[0])
 
             if crsr.fetchone() is None:
-                flash("Either Username or Password is wrong")
                 return render_template('login.html')
             else:
                 session['logged_in'] = True
@@ -70,18 +75,16 @@ def login():
             return redirect(url_for('home'))
             
         except Exception as e:
-            flash(f"{e}") 
             return redirect(url_for('home'))
 
 
-# @app.route('/register/', methods=['GET', 'POST'])
+@app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username=request.form['username']
         password=request.form['password']
 
         if username == '' or password == '':
-            flash("Fill the empty field")
             return render_template('register.html')
         
         try:
@@ -92,7 +95,6 @@ def register():
             conn.commit()
             
         except:
-            flash("Username already exists.")  
             return render_template('register.html')
 
         return render_template('login.html')
@@ -102,7 +104,6 @@ def register():
 @app.route("/logout/")
 def logout():
     session['logged_in'] = False
-    flash("You are successfuly Logged out") 
     return redirect(url_for('home'))
 
 
