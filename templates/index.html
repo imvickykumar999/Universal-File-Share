@@ -1,49 +1,50 @@
 
+{% extends "base.html" %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>File Transfer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
 </head>
+
 <body>
-  <center>
     <div class="container">
       <div class="row">
+        
+        <center>
+          <div>
+            Open above link in your Mobile or Other Laptop
+          </div>
 
-        <br><br>
-        <div>
-          <h4>
-            <a href="/">
-              <h1>Home</h1>
-            </a>
-          </h4>
+          <br> <hr>
+          <form action = "/" method = "post" enctype="multipart/form-data">  
+            <input type="file" name="file" /> 
 
-          Open above link in your Mobile or Other Laptop
-        </div>
-
-        <br> <hr>
-        <form action = "/" method = "post" enctype="multipart/form-data">  
-          <input type="file" name="file" /> 
-
-          <br> 
-          <input type = "submit" value="Upload">  
-        </form> 
+            <br> 
+            <input type = "submit" value="Upload">  
+          </form> 
+        </center>
 
         <hr>
         {% for i in new_path %}
-        <h3>
-          <li>
-        <a target = '_blank' href="{{i}}">
-          {{os.path.basename(i)}}
-        </a>
-          </li>
-        </h3>
+          <h3>
+            <li>
+                  <a target = '_blank' href="{{i}}">
+                    {{os.path.basename(i)}}
+                  </a>
+            </li>
+          </h3>
 
-      <br>
+        <br>
         {% endfor %}
+
+        <hr>
+        <a href="/logout/">
+          <h5>
+            [ Logout ]
+          </h5>
+        </a>
 
       </div>
     </div>
@@ -52,6 +53,6 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 
-  </center>
 </body>
 </html>
+{% endblock %}
