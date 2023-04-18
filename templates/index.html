@@ -16,15 +16,23 @@
       <br><br>
       <div>
         <h1 class="page-header">
-          Open this link in your mobile
+          Open this link in your Mobile or Other Laptop
         </h1> 
       </div>
 
+      <form action = "/" method = "post" enctype="multipart/form-data">  
+          <input type="file" name="file" /> 
+
+          <br> 
+          <input type = "submit" value="Upload">  
+      </form> 
+
+      <hr>
       {% for i in new_path %}
       <h3>
         <li>
 			<a target = '_blank' href="/{{i}}">
-          		{{i}}
+        {{os.path.basename(i)}}
 			</a>
         </li>
       </h3>
