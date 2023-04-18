@@ -9,7 +9,7 @@ app.jinja_env.globals.update(os=os)
 
 
 try:
-    os.mkdir('input')
+    os.mkdir('static')
 except:
     pass
 
@@ -18,20 +18,20 @@ except:
 def home():
     if request.method == 'POST':  
         f = request.files['file']
-        saved = os.path.join('input', f.filename)
-        print(saved)
+
+        saved = os.path.join('static', f.filename)
         f.save(saved)  
     
-    new_path = sorted(Path('./input').iterdir(),
+    new_path = sorted(Path('static').iterdir(),
                         key=os.path.getmtime)
     
     return render_template('index.html', 
                            new_path=new_path)
 
 
-@app.route('/input/<filename>')
+@app.route('/static/<filename>')
 def send_vixtify(filename):
-    return send_from_directory("input", filename)
+    return send_from_directory("static", filename)
 
 
 if __name__ == '__main__':

@@ -16,28 +16,27 @@
       <br><br>
       <div>
         <h4>
-          <a target = '_blank' href="https://imvickykumar999.pythonanywhere.com/">
-            Share Files
+          <a href="/">
+            <h1>Home</h1>
           </a>
         </h4>
 
-        <h1 class="page-header">
-          Open above link in your Mobile or Other Laptop
-        </h1> 
+        Open above link in your Mobile or Other Laptop
       </div>
 
+      <br> <hr>
       <form action = "/" method = "post" enctype="multipart/form-data">  
-          <input type="file" name="file" /> 
+        <input type="file" name="file" /> 
 
-          <br> 
-          <input type = "submit" value="Upload">  
+        <br> 
+        <input type = "submit" value="Upload">  
       </form> 
 
       <hr>
       {% for i in new_path %}
       <h3>
         <li>
-			<a target = '_blank' href="/{{i}}">
+			<a target = '_blank' href="{{i}}">
         {{os.path.basename(i)}}
 			</a>
         </li>
