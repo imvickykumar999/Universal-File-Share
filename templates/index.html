@@ -9,48 +9,49 @@
 
 </head>
 <body>
+  <center>
+    <div class="container">
+      <div class="row">
 
-  <div class="container">
-    <div class="row">
+        <br><br>
+        <div>
+          <h4>
+            <a href="/">
+              <h1>Home</h1>
+            </a>
+          </h4>
 
-      <br><br>
-      <div>
-        <h4>
-          <a href="/">
-            <h1>Home</h1>
-          </a>
-        </h4>
+          Open above link in your Mobile or Other Laptop
+        </div>
 
-        Open above link in your Mobile or Other Laptop
+        <br> <hr>
+        <form action = "/" method = "post" enctype="multipart/form-data">  
+          <input type="file" name="file" /> 
+
+          <br> 
+          <input type = "submit" value="Upload">  
+        </form> 
+
+        <hr>
+        {% for i in new_path %}
+        <h3>
+          <li>
+        <a target = '_blank' href="{{i}}">
+          {{os.path.basename(i)}}
+        </a>
+          </li>
+        </h3>
+
+      <br>
+        {% endfor %}
+
       </div>
-
-      <br> <hr>
-      <form action = "/" method = "post" enctype="multipart/form-data">  
-        <input type="file" name="file" /> 
-
-        <br> 
-        <input type = "submit" value="Upload">  
-      </form> 
-
-      <hr>
-      {% for i in new_path %}
-      <h3>
-        <li>
-			<a target = '_blank' href="{{i}}">
-        {{os.path.basename(i)}}
-			</a>
-        </li>
-      </h3>
-
-	  <br>
-      {% endfor %}
-
     </div>
-  </div>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-          crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
 
+  </center>
 </body>
 </html>
