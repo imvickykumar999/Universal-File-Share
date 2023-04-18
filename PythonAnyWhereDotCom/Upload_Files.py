@@ -41,24 +41,25 @@ def List_Files():
 # List_Files()
 
 
-def Download_File():
+def Download_File(file):
     List_Files()
-    file = input('Enter File Name from above list : ')
+    # file = 'Files/' + input('Enter File Name from above list : ')
 
     resp = requests.get(
         urljoin(api_base, f"files/path/home/{username}/mysite/input/{file}"),
         headers={"Authorization": "Token {api_token}".format(api_token=api_token)}
     )
 
-    with open(f'Files/{file}', 'wb') as f:
+    with open(f'{file}', 'wb') as f:
         f.write(resp.content)
 
-# Download_File()
+# Download_File(file)
 
 
-def Upload_File():
-    file = input('Enter File Name : ')
-    with open(f'Files/{file}', 'rb') as f:
+def Upload_File(file):
+    # file = 'Files/' + input('Enter File Name : ')
+
+    with open(f'{file}', 'rb') as f:
         cont = f.read()
 
     requests.post(
@@ -67,4 +68,4 @@ def Upload_File():
         headers={"Authorization": f"Token {api_token}"}
     )
 
-# Upload_File()
+# Upload_File(file)

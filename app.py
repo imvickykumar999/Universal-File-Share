@@ -19,6 +19,7 @@ def home():
     if request.method == 'POST':  
         f = request.files['file']
         saved = os.path.join('input', f.filename)
+        print(saved)
         f.save(saved)  
     
     new_path = sorted(Path('./input').iterdir(),
