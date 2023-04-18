@@ -1,12 +1,15 @@
 
 from flask import Flask, render_template, send_from_directory, request
-from fileinput import filename
 from pathlib import Path
 import os
 
 app = Flask(__name__)
 app.jinja_env.globals.update(os=os)
 
+try:
+    os.mkdir('input')
+except:
+    pass
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
