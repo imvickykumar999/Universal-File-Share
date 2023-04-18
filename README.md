@@ -1,4 +1,7 @@
 ># `Offline-File-Transfer`
 >
->![image](https://user-images.githubusercontent.com/50515418/232766403-6b38b15e-fb75-4e10-88e4-df0f1da31615.png)
+>![image](https://user-images.githubusercontent.com/50515418/232789468-651523c2-5f49-42cf-9368-d8cdb4118d09.png)
+> -------------------------
+># `Authentication`
+>![image](https://user-images.githubusercontent.com/50515418/232788784-5fb10b3c-64bf-4075-9085-18d00813658f.png)
 >
