@@ -7,22 +7,16 @@ import requests
 
 username = 'imvickykumar999'
 pythonanywhere_host = "www.pythonanywhere.com"
+api_base = f"https://{pythonanywhere_host}/api/v0/user/{username}/"
 
 with open('API_Token.txt', 'r') as f:
-    api_token = f.read()
-
-api_base = "https://{pythonanywhere_host}/api/v0/user/{username}/".format(
-    pythonanywhere_host=pythonanywhere_host,
-    username=username,
-)
+    api_token = f.read() # file is in .gitignore
 
 
 def CPU_Quota():
     response = requests.get(
-        'https://www.pythonanywhere.com/api/v0/user/{username}/cpu/'.format(
-            username=username
-        ),
-        headers={'Authorization': 'Token {api_token}'.format(api_token=api_token)}
+        f'https://www.pythonanywhere.com/api/v0/user/{username}/cpu/',
+        headers={'Authorization': f'Token {api_token}'}
     )
     if response.status_code == 200:
         print('CPU quota info:')
@@ -33,31 +27,44 @@ def CPU_Quota():
 # CPU_Quota()
 
 
-def Listing_Files():
+def List_Files():
     resp = requests.get(
-        urljoin(api_base, "files/path/home/{username}/mysite/input/".format(username=username)),
-        headers={"Authorization": "Token {api_token}".format(api_token=api_token)}
+        urljoin(api_base, f"files/path/home/{username}/mysite/input/"),
+        headers={"Authorization": f"Token {api_token}"}
     )
 
     print()
-    for i,j in enumerate(list(resp.json().keys())):
+    for i,j in enumerate(resp.json().keys()):
         print(i+1, '). ', j)
     print()
 
-# Listing_Files()
+# List_Files()
 
 
-def Download_Files():
-    Listing_Files()
+def Download_File():
+    List_Files()
     file = input('Enter File Name from above list : ')
 
     resp = requests.get(
-        urljoin(api_base, f"files/path/home/{username}/mysite/input/{file}".format(username=username)),
+        urljoin(api_base, f"files/path/home/{username}/mysite/input/{file}"),
         headers={"Authorization": "Token {api_token}".format(api_token=api_token)}
     )
 
     with open(f'Files/{file}', 'wb') as f:
         f.write(resp.content)
 
-# Download_Files()
+# Download_File()
 
+
+def Upload_File():
+    file = input('Enter File Name : ')
+    with open(f'Files/{file}', 'rb') as f:
+        cont = f.read()
+
+    requests.post(
+        urljoin(api_base, f"files/path/home/{username}/mysite/input/{file}"),
+        files={"content": cont},
+        headers={"Authorization": f"Token {api_token}"}
+    )
+
+# Upload_File()
