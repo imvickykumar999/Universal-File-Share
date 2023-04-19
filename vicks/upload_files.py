@@ -10,8 +10,7 @@ pythonanywhere_host = "www.pythonanywhere.com"
 api_base = f"https://{pythonanywhere_host}/api/v0/user/{username}/"
 
 
-folder = 'vicks'
-# folder = '.'
+folder = ('vicks', '.')[1]
 with open(f'{folder}/API_Token.txt', 'r') as f:
     api_token = f.read() # file is in .gitignore
 
@@ -40,19 +39,19 @@ def List_Files():
     )
 
     print()
+    enum = list(resp.json().keys())
+
     for i,j in enumerate(resp.json().keys()):
         print(i+1, '). ', j)
 
     print()
-    return list(resp.json().keys())
+    return enum
 
 # all_files = List_Files()
 # print(all_files)
 
 
-def Download_File(file):
-    print(file)
-    
+def Download_File(file):    
     resp = requests.get(
         urljoin(api_base, 
                 f"files/path/home/{username}/mysite/static/{os.path.basename(file)}"
@@ -64,13 +63,11 @@ def Download_File(file):
         f.write(resp.content)
 
 # List_Files()
-# file = 'Files/' + input('Enter File Name from above list : ')
+# file = 'static/' + input('Enter File Name from above list to Download : ')
 # Download_File(file)
 
 
 def Upload_File(file):
-    # print(file)
-
     with open(f'{file}', 'rb') as f:
         cont = f.read()
 
@@ -82,5 +79,20 @@ def Upload_File(file):
         headers={"Authorization": f"Token {api_token}"}
     )
 
-# file = 'Files/' + input('Enter File Name : ')
+# file = 'static/' + input('Enter File Name to Upload : ')
 # Upload_File(file)
+
+
+def Delete_File(file):
+    requests.delete(
+        urljoin(api_base, f"files/path/home/{username}/mysite/static/{os.path.basename(file)}"),
+        headers={"Authorization": f"Token {api_token}"}
+    )
+
+# print('\n\t>>> Before Deletion ...')
+# List_Files()
+# file = input('Enter File Name from above list to Delete : ')
+
+# print('\n\t>>> After Deletion ...')
+# Delete_File(file)
+# List_Files()

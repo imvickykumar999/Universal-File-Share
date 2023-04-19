@@ -1,8 +1,8 @@
 
 from flask import Flask, url_for, render_template, request, redirect, session, send_from_directory
 from werkzeug.utils import secure_filename
+import sqlite3, os, requests
 from pathlib import Path
-import sqlite3, os
 
 
 try:
@@ -23,9 +23,35 @@ app = Flask(__name__)
 app.jinja_env.globals.update(os=os)
 
 
+def getname(url):
+    url = list(url.split('/'))
+
+    if len(url) == 1:
+        url = url[0]
+        itis = 'user'
+
+        if len(url) == 11 and url[0] == 'C':
+            itis = 'reels'
+    else:
+        if url[3] in ['reels', 'reel', 'p']:
+            url = url[4]
+            itis = 'reels'
+        else:
+            url = url[3]
+            itis = 'user'
+
+    return url, itis
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     static_username = 'static/' + session['username']
+
+    try:
+        reqid = getname(request.args.get("URL"))[0]
+        return redirect(requests.get(f'https://www.instagram.com/p/{reqid}/?__a=1&__d=1').json()['graphql']['shortcode_media']['video_url'], code=200)
+    except:
+        pass
 
     try:
         os.mkdir(static_username)

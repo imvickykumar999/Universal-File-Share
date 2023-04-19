@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Transfer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+
+      <br><br>
+      <div>
+        <h4>
+          <a href="/">
+            <h1>Home</h1>
+          </a>
+        </h4>
+
+        Open above link in your Mobile or Other Laptop
+      </div>
+
+      <br> <hr>
+      <form action = "/" method = "post" enctype="multipart/form-data">  
+        <input type="file" name="file" /> 
+
+        <br> 
+        <input type = "submit" value="Upload">  
+      </form> 
+
+      <hr>
+      {% for i in new_path %}
+      <h3>
+        <li>
+			<a target = '_blank' href="{{i}}">
+        {{os.path.basename(i)}}
+			</a>
+        </li>
+      </h3>
+
+	  <br>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+          crossorigin="anonymous"></script>
+
+</body>
+</html>
