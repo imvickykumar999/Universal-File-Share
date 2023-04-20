@@ -31,15 +31,43 @@
 
         <hr>
         {% for i in new_path %}
-          <h3>
-            <li>
-                  <a target = '_blank' href="{{i}}">
+          <ul>
+            {% if os.path.isfile(i) %}
+              <a target = '_blank' href="{{i}}">
+                <li>
+                  <h3>
                     {{os.path.basename(i)}}
-                  </a>
-            </li>
-          </h3>
+                  </h3>
+                </li>
+              </a>
 
-        <br>
+              {% else %}
+              <a class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <li>
+                  <h3>
+                    {{os.path.basename(i)}}
+                  </h3>
+                  <h6>(Click to Open Folder)</h6>
+                </li>
+              </a>
+
+              <div class="collapse" id="collapseExample">
+                <ul>
+                  {% for j in os.listdir(i) %}
+                    <li>
+                      <a target = '_blank' href="{{i}}/{{j}}">
+                      
+                          <h5>{{ j }}<h5>
+
+                      </a>
+                      <br>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+            {% endif %}
+          </ul>
         {% endfor %}
 
         <hr>
