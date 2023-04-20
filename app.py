@@ -45,7 +45,10 @@ def getname(url):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    static_username = 'static/' + session['username']
+    try:
+        static_username = 'static/' + session['username']
+    except:
+        static_username = 'static'
 
     try:
         reqid = getname(request.args.get("URL"))[0]
