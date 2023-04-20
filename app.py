@@ -21,6 +21,7 @@ conn.execute('''
 
 app = Flask(__name__)
 app.jinja_env.globals.update(os=os)
+app.jinja_env.globals.update(session=session)
 
 
 def getname(url):
@@ -53,7 +54,7 @@ def home():
     try:
         reqid = getname(request.args.get("URL"))[0]
         link = f'https://www.instagram.com/p/{reqid}/?__a=1&__d=1'
-        
+
         fetch = requests.get(link).json()['graphql']
         return redirect(fetch['shortcode_media']['video_url'], 
                         code=200)
