@@ -1,8 +1,12 @@
->## `pip install vixsharefile`
+># ! `pip install` [`vixsharefile`](https://pypi.org/project/vixsharefile/)
+>
+>- `Run python on` [`Android App`](https://play.google.com/store/apps/details?id=ru.iiec.pydroid3&hl=en_IN&gl=US)
 >
 >- `from vixsharefile import run_server`
 >
->![image](https://user-images.githubusercontent.com/50515418/233545675-86c95b69-5b97-449e-b180-ec29fe948ae0.png)
+>--------------------
+>
+>[![image](https://user-images.githubusercontent.com/50515418/233547475-14144cef-1fab-48b1-ad47-7ad1b8153560.png)](https://pypi.org/project/vixsharefile/)
 >
 ># `Universal File Share`
 >
