@@ -1,6 +1,6 @@
 
 import requests, zipfile, os
-URL = 'https://github.com/imvickykumar999/Universal-File-Share/raw/main/vicks/shareit.zip'
+URL = 'https://github.com/imvickykumar999/Universal-File-Share/raw/main/android.zip'
 
 r = requests.get(URL, allow_redirects=True)
 open('android.zip', 'wb').write(r.content)

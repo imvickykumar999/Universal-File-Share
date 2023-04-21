@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+	<body>
+		<center>
+			{% if session['logged_in'] %}
+				<p>Oh no Dont show page</p>
+			{% else %}
+
+			<h2>Register</h2>
+			<form action="/register/" method="POST">
+				<input type="username" name="username" placeholder="Username">
+				<input type="password" name="password" placeholder="Password">
+				<input type="submit" value="Sign up">
+			</form>
+			{% endif %}
+		
+		<hr>
+        <a href="/login/">
+          <h5>
+            [ Login ]
+          </h5>
+        </a>
+
+		</center>
+	</body>
+</html>
+{% endblock %}
