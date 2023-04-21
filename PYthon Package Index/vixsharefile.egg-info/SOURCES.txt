@@ -1,0 +1,12 @@
+License.txt
+MANIFEST.in
+README.md
+Readme.txt
+about.txt
+setup.py
+vixsharefile/__init__.py
+vixsharefile/run_server.py
+vixsharefile.egg-info/PKG-INFO
+vixsharefile.egg-info/SOURCES.txt
+vixsharefile.egg-info/dependency_links.txt
+vixsharefile.egg-info/top_level.txt

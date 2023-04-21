@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: vixsharefile
+Version: 0.0.1
+Summary: Share Files Instantly.
+Home-page: https://github.com/imvickykumar999/Universal-File-Share
+Author: Vicky Kumar
+License: MIT
+Keywords: Share Files,Videos,Photos,CSV,any_file
+License-File: License.txt
+
+
+'This package has File Sharing functions.'
+
+# Usage :
+
+`from vixsharefile import run_server`
