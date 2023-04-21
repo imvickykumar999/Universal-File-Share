@@ -1,10 +1,10 @@
 ># `Universal File Share`
 >
->![image](https://user-images.githubusercontent.com/50515418/232789468-651523c2-5f49-42cf-9368-d8cdb4118d09.png)
+>![image](https://user-images.githubusercontent.com/50515418/233539871-2e97f9d5-d5f2-43c3-b610-f86f00d6b271.png)
 >
 > -------------------------
 >
 ># `Authentication`
 >
->![image](https://user-images.githubusercontent.com/50515418/232788784-5fb10b3c-64bf-4075-9085-18d00813658f.png)
+>![image](https://user-images.githubusercontent.com/50515418/233540393-ab3f456c-17a4-4825-a567-8f551f3953d8.png)
 >
