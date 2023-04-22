@@ -71,7 +71,7 @@
                   {% if os.path.splitext(os.path.basename(i))[1] in ['.jpg', '.png', '.jpeg', '.gif'] %}
                     <img width="50%" src="{{i}}" alt="{{i}}">
 
-                  {% elif os.path.splitext(os.path.basename(i))[1] in ['.mp3', '.m4a', '.wav'] %}
+                  {% elif os.path.splitext(os.path.basename(i))[1] in ['.mp3', '.m4a', '.wav', '.opus'] %}
                     <audio controls>
 
                       <source src="{{i}}" type="audio/ogg">
@@ -117,7 +117,7 @@
                         {% if os.path.splitext(os.path.basename(j))[1] in ['.jpg', '.png', '.jpeg', '.gif'] %}
                           <img width="50%" src="{{i}}/{{j}}" alt="{{ j }}">
 
-                        {% elif os.path.splitext(os.path.basename(j))[1] in ['.mp3', '.m4a', '.wav'] %}
+                        {% elif os.path.splitext(os.path.basename(j))[1] in ['.mp3', '.m4a', '.wav', '.opus'] %}
                           <audio controls>
 
                             <source src="{{i}}/{{j}}" type="audio/ogg">
