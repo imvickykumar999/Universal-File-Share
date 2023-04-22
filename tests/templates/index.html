@@ -6,13 +6,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style type='text/css'>
+      .list-item {
+        margin-left: 10px;
+        display: inline-block;
+      }
+
+      .scroll { 
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        width: auto;
+      }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-      <div class="row">
-        
-        <center>
+    <center>
+      <div class="container">
+        <div class="row">
+          
           <div>
             Hi
               <a target = '_blank' href="https://www.instagram.com/{{session['username']}}/">
@@ -32,6 +45,11 @@
             <input type="file" name="file" /> 
 
             <br> 
+            Extract Frames ?  
+            <input type="checkbox" name="checked" value="1">
+            <br>
+
+            <br>
             <input type = "submit" value="Upload" disabled="true">  
           </form> 
 
@@ -42,64 +60,112 @@
               document.querySelector("input[type=submit]").disabled = !value;
             };
           </script>
-        </center>
 
-        <hr>
-        {% for i in new_path %}
-          <ul>
-            {% if os.path.isfile(i) %}
-              <a target = '_blank' href="{{i}}">
-                <li>
-                  <h3>
-                    {{os.path.basename(i)}}
-                  </h3>
-                </li>
-              </a>
+          <hr>
+          {% for i in new_path %}
+            <ul class="scroll">
 
-              {% else %}
-              <a class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                <li>
-                  <h3>
-                    {{os.path.basename(i)}}
-                  </h3>
-                  <h6>(Click to Open Folder)</h6>
-                </li>
-              </a>
+              {% if os.path.isfile(i) %}
+                <li class="list-item">
 
-              <div class="collapse" id="collapseExample">
-                <ul>
-                  {% for j in os.listdir(i) %}
-                    <li>
-                      <a target = '_blank' href="{{i}}/{{j}}">
-                      
-                          <h5>{{ j }}<h5>
+                  {% if os.path.splitext(os.path.basename(i))[1] in ['.jpg', '.png', '.jpeg', '.gif'] %}
+                    <img width="50%" src="{{i}}" alt="{{i}}">
 
+                  {% elif os.path.splitext(os.path.basename(i))[1] in ['.mp3', '.m4a', '.wav'] %}
+                    <audio controls>
+
+                      <source src="{{i}}" type="audio/ogg">
+                      <source src="{{i}}" type="audio/mpeg">
+
+                    Your browser does not support the audio element.
+                    </audio>
+                    
+                    {% elif os.path.splitext(os.path.basename(i))[1] in ['.mp4', '.avi'] %}
+                      <video width="50%" controls>
+                        <source src="{{i}}">
+                      </video>
+
+                    {% else %}
+                      <a target = '_blank' href="{{i}}">
+                        <br>
+                        <h4>{{os.path.basename(i)}}</h4>
                       </a>
-                      <br>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
+                    {% endif %}
 
-            {% endif %}
-          </ul>
-        {% endfor %}
+                  <br>
+                </li>
 
-        <hr>
-        <a href="/logout/">
-          <h5>
-            [ Logout ]
-          </h5>
-        </a>
+                {% else %}
+                <a class="btn" data-toggle="collapse" href="#collapseExample{{i}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <li>
 
+                    <h3>
+                      {{os.path.basename(i)}}
+                    </h3>
+
+                    <h6>(Click to Open Folder)</h6>
+                  </li>
+                </a>
+
+                <br> <br>
+                <div class="collapse" id="collapseExample{{i}}">
+                  <ul class="scroll">
+
+                    {% for j in os.listdir(i) %}
+                      <li class="list-item">
+
+                        {% if os.path.splitext(os.path.basename(j))[1] in ['.jpg', '.png', '.jpeg', '.gif'] %}
+                          <img width="50%" src="{{i}}/{{j}}" alt="{{ j }}">
+
+                        {% elif os.path.splitext(os.path.basename(j))[1] in ['.mp3', '.m4a', '.wav'] %}
+                          <audio controls>
+
+                            <source src="{{i}}/{{j}}" type="audio/ogg">
+                            <source src="{{i}}/{{j}}" type="audio/mpeg">
+
+                          Your browser does not support the audio element.
+                          </audio>  
+
+                        {% elif os.path.splitext(os.path.basename(j))[1] in ['.mp4', '.avi'] %}
+                          <video width="30%" controls>
+                            <source src="{{i}}/{{j}}">
+                          </video>
+
+                        {% else %}
+                          <a target = '_blank' href="{{i}}/{{j}}">
+                            <br>
+                            <h4>{{j}}</h4>
+                          </a>
+                        {% endif %}
+
+                        <br>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+              {% endif %}
+            </ul>
+            <br> <br>
+          {% endfor %}
+
+          <hr>
+          <a href="/logout/">
+            <h5>
+              [ Logout ]
+            </h5>
+          </a>
+          
+          <br> <br>
+        </div>
       </div>
-    </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-      integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-      crossorigin="anonymous">
-    </script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous">
+      </script>
 
-</body>
+    </center>
+  </body>
 </html>
 {% endblock %}
