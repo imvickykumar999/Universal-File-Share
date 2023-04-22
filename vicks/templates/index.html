@@ -1,56 +1,105 @@
 
+{% extends "base.html" %}
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>File Transfer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
 </head>
+
 <body>
+    <div class="container">
+      <div class="row">
+        
+        <center>
+          <div>
+            Hi
+              <a target = '_blank' href="https://www.instagram.com/{{session['username']}}/">
+                @{{session['username']}}
+              </a>,
+            <br>
+            Open above link in your Mobile or Other Laptop
+          </div>
 
-  <div class="container">
-    <div class="row">
-
-      <br><br>
-      <div>
-        <h4>
-          <a href="/">
-            <h1>Home</h1>
+          <br> <hr>
+          <a target = '_blank' href="/?URL=https://www.instagram.com/p/CofF8nRthEy/">
+            [ Download Reels by URL ]
           </a>
-        </h4>
+          <hr>
 
-        Open above link in your Mobile or Other Laptop
+          <form action = "/" method = "post" enctype="multipart/form-data">  
+            <input type="file" name="file" /> 
+
+            <br> 
+            <input type = "submit" value="Upload" disabled="true">  
+          </form> 
+
+          <script>
+            document.querySelector("input[type=file]").onchange = ({
+              target: { value },
+            }) => {
+              document.querySelector("input[type=submit]").disabled = !value;
+            };
+          </script>
+        </center>
+
+        <hr>
+        {% for i in new_path %}
+          <ul>
+            {% if os.path.isfile(i) %}
+              <a target = '_blank' href="{{i}}">
+                <li>
+                  <h3>
+                    {{os.path.basename(i)}}
+                  </h3>
+                </li>
+              </a>
+
+              {% else %}
+              <a class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <li>
+                  <h3>
+                    {{os.path.basename(i)}}
+                  </h3>
+                  <h6>(Click to Open Folder)</h6>
+                </li>
+              </a>
+
+              <div class="collapse" id="collapseExample">
+                <ul>
+                  {% for j in os.listdir(i) %}
+                    <li>
+                      <a target = '_blank' href="{{i}}/{{j}}">
+                      
+                          <h5>{{ j }}<h5>
+
+                      </a>
+                      <br>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+            {% endif %}
+          </ul>
+        {% endfor %}
+
+        <hr>
+        <a href="/logout/">
+          <h5>
+            [ Logout ]
+          </h5>
+        </a>
+
       </div>
-
-      <br> <hr>
-      <form action = "/" method = "post" enctype="multipart/form-data">  
-        <input type="file" name="file" /> 
-
-        <br> 
-        <input type = "submit" value="Upload">  
-      </form> 
-
-      <hr>
-      {% for i in new_path %}
-      <h3>
-        <li>
-			<a target = '_blank' href="{{i}}">
-        {{os.path.basename(i)}}
-			</a>
-        </li>
-      </h3>
-
-	  <br>
-      {% endfor %}
-
     </div>
-  </div>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-          crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+      integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+      crossorigin="anonymous">
+    </script>
 
 </body>
 </html>
+{% endblock %}
