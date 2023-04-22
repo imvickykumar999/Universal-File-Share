@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <style type='text/css'>
       .list-item {
-        background: rgba(255, 0, 0, 0.1);
         margin-left: 10px;
         display: inline-block;
       }
@@ -85,15 +84,33 @@
                 </li>
               </a>
 
+              <br> <br>
               <div class="collapse" id="collapseExample{{i}}">
                 <ul class="scroll">
+
                   {% for j in os.listdir(i) %}
                     <li class="list-item">
+                      <center>
 
-                      <a target = '_blank' href="{{i}}/{{j}}">
-                        <img width="50%" src="{{i}}/{{j}}" alt="{{ j }}">
-                      </a>
-                      
+                        <a target = '_blank' href="{{i}}/{{j}}">
+                          {% if os.path.splitext(os.path.basename(j))[1] in ['.jpg', '.png', '.jpeg'] %}
+                            <img width="50%" src="{{i}}/{{j}}" alt="{{ j }}">
+
+                          {% elif os.path.splitext(os.path.basename(j))[1] in ['.mp3', '.m4a', '.wav'] %}
+                            <audio controls>
+
+                              <source src="{{i}}/{{j}}" type="audio/ogg">
+                              <source src="{{i}}/{{j}}" type="audio/mpeg">
+
+                            Your browser does not support the audio element.
+                            </audio>                          
+                          {% endif %}
+
+                          <br>
+                          <h4>{{j}}</h4>
+                        </a>
+
+                      </center>
                       <br>
                     </li>
                   {% endfor %}

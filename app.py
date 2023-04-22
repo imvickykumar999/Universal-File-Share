@@ -3,7 +3,7 @@ from flask import Flask, url_for, render_template, request, redirect, session, s
 from werkzeug.utils import secure_filename
 import sqlite3, os, requests
 from pathlib import Path
-
+import numpy as np
 
 try:
     os.mkdir('static')
@@ -20,8 +20,12 @@ conn.execute('''
 ''')
 
 app = Flask(__name__)
-app.jinja_env.globals.update(os=os, 
+app.jinja_env.globals.update(
                              session=session,
+                             sorted=sorted,
+                             int=int,
+                             os=os,
+                             np=np,
                              )
 
 
