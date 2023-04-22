@@ -20,8 +20,32 @@ conn.execute('''
 ''')
 
 app = Flask(__name__)
-app.jinja_env.globals.update(os=os)
-app.jinja_env.globals.update(session=session)
+app.jinja_env.globals.update(os=os, 
+                             session=session,
+                             )
+
+
+def extract_frames(static_username, filename):
+    import cv2
+
+    saved = os.path.join(static_username, filename)
+    vidcap = cv2.VideoCapture(saved)
+    success, image = vidcap.read()
+
+    filename = filename.split('.')[0]
+    folder = os.path.join(static_username, filename)
+
+    try:
+        os.mkdir(folder)
+    except Exception as e:
+        print(e)
+
+    count = 0
+    while success:
+        cv2.imwrite(f"{folder}/{count}.jpg", image)     # save frame as JPEG file      
+        success,image = vidcap.read()
+        # print('Read a new frame: ', success)
+        count += 1
 
 
 def getname(url):
@@ -72,6 +96,15 @@ def home():
         filename = secure_filename(f.filename)
         saved = os.path.join(static_username, filename)
         f.save(saved)
+
+        checkbox = len(request.form.getlist('checked'))
+        checkfile = filename.split('.')[-1].lower() in ['mp4', 'avi']
+
+        if checkfile and checkbox:
+            try:
+                extract_frames(static_username, filename)
+            except Exception as e:
+                print(e)
     
     elif not session.get('logged_in'):
         return render_template('login.html')

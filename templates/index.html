@@ -32,6 +32,11 @@
             <input type="file" name="file" /> 
 
             <br> 
+            Extract Frames ?  
+            <input type="checkbox" name="checked" value="1">
+            <br>
+
+            <br>
             <input type = "submit" value="Upload" disabled="true">  
           </form> 
 
@@ -57,7 +62,7 @@
               </a>
 
               {% else %}
-              <a class="btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <a class="btn" data-toggle="collapse" href="#collapseExample{{i}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                 <li>
                   <h3>
                     {{os.path.basename(i)}}
@@ -66,7 +71,7 @@
                 </li>
               </a>
 
-              <div class="collapse" id="collapseExample">
+              <div class="collapse" id="collapseExample{{i}}">
                 <ul>
                   {% for j in os.listdir(i) %}
                     <li>
