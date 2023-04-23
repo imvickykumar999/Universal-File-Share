@@ -6,7 +6,7 @@ from kivy.app import App
 from threading import Thread
 from kivy.uix.textinput import TextInput
 
-import logging, re
+import logging
 import webbrowser
 
 logger = logging.getLogger('werkzeug')
@@ -22,10 +22,8 @@ class MyApp(App):
         with open('test.log', encoding='utf-8') as f:
             save = f.read()
 
-        urls = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', save)[1] + ':5000'
-        self.log_text.insert_text(f'{urls}\n')
-
-        webbrowser.open(urls)
+        self.log_text.insert_text(f'{save}\n')
+        webbrowser.open(save)
         return self.log_text
 
 
