@@ -11,7 +11,9 @@ class MyApp(App):
         Thread(target=self.start_flask).start()
         self.log_text = TextInput(multiline=True, text='Flask is listening either\n')
 
-        self.log_text.insert_text('http://192.168.0.104:5000 or\nhttp://192.168.0.102:5000')
+        self.log_text.insert_text('\nhttp://192.168.0.104:5000\n')
+        self.log_text.insert_text('\nhttp://192.168.0.102:5000\n')
+        self.log_text.insert_text('\nPress Ctrl + C to exit.\n')
         return self.log_text
 
     def start_flask(self):
