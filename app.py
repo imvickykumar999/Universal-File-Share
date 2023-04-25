@@ -92,7 +92,7 @@ def home():
         r = requests.get(url, allow_redirects=True)
         open(f'{static_username}/{reqid}.mp4', 'wb').write(r.content)
 
-        return redirect(url, code=200)
+        # return redirect(url, code=200)
     except:
         pass
 
