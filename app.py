@@ -80,12 +80,19 @@ def home():
         static_username = 'static'
 
     try:
-        reqid = getname(request.args.get("URL"))[0]
+        # f = request.files['URL']
+        f = request.args.get("URL")
+
+        reqid = getname(f)[0]
         link = f'https://www.instagram.com/p/{reqid}/?__a=1&__d=1'
 
         fetch = requests.get(link).json()['graphql']
-        return redirect(fetch['shortcode_media']['video_url'], 
-                        code=200)
+        url = fetch['shortcode_media']['video_url']
+
+        r = requests.get(url, allow_redirects=True)
+        open(f'{static_username}/{reqid}.mp4', 'wb').write(r.content)
+
+        return redirect(url, code=200)
     except:
         pass
 
