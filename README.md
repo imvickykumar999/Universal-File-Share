@@ -1,5 +1,10 @@
 ## `Run python on` [`Android App`](https://play.google.com/store/apps/details?id=ru.iiec.pydroid3&hl=en_IN&gl=US) `or Desktop`
 
+      def get_ip_address():
+          s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+          s.connect(("8.8.8.8", 80))
+          return s.getsockname()[0]
+    
 --------------------
 
       >>> pip install vixsharefile
